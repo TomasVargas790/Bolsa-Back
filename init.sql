@@ -1,0 +1,2 @@
+CREATE DATABASE bolsa;
+USE BOLSA;
