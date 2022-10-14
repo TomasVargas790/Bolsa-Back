@@ -6,6 +6,7 @@ CREATE TABLE `lista_empresa` (
     `empresa_descripcion` longtext NOT NULL,
     `empresa_ubicacion` varchar(60) NOT NULL,
     `empresa_correo` varchar(60) NOT NULL,
+    `empresa_img` blob NOT NULL,
     `empresa_telefono` varchar(18) NOT NULL,
     PRIMARY KEY (`id_empresa`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;

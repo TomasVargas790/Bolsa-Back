@@ -6,6 +6,7 @@ CREATE TABLE `lista_empleado` (
     `empleado_dni` varchar(9) NOT NULL,
     `empleado_ubicacion` varchar(60) NOT NULL,
     `empleado_telefono` varchar(35) NOT NULL,
+    `empleado_img` large_blob NOT NULL,
     `empleado_cv` blob NOT NULL,
     `empleado_hash` longtext NOT NULL,
     PRIMARY KEY (`id_empleado`)
