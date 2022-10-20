@@ -1,27 +1,51 @@
-CREATE FUNCTION `setEmpleado` (nombre_empleado VARCHAR(50), apellido_empleado VARCHAR(50), documento_empleado   VARCHAR(9),correo_empleado VARCHAR(60), telefono_empleado VARCHAR(35), cv_empleado longtext,ubicacion_empleado VARCHAR(60),hash_empleado longtext)
+DELIMITER // 
+CREATE FUNCTION `setEmpleado` (
+    `empleado_nombre` varchar(50),
+    `empleado_apellido` varchar(50),
+    `empleado_correo` varchar(60),
+    `empleado_dni` varchar(9),
+    `empleado_ubicacion` varchar(60),
+    `empleado_telefono` varchar(35),
+    `empleado_img` longblob,
+    `empleado_cv` longblob,
+    `empleado_hash` longtext
+) RETURNS TEXT BEGIN DECLARE __mensaje text;
 
-RETURNS TEXT
-BEGIN
+SET __mensaje = `Se prudujo un error agregando el usuario`;
 
-    DECLARE __mensaje text;
-    SET __mensaje = `Se prudujo un error agregando el usuario`;
+if (
+    (empleado_nombre IS NOT NULL)
+    AND (empleado_apellido IS NOT NULL)
+    AND (empleado_correo IS NOT NULL)
+    AND (empleado_dni IS NOT NULL)
+    AND (empleado_ubicacion IS NOT NULL)
+    AND (empleado_telefono IS NOT NULL)
+    AND (empleado_img IS NOT NULL)
+    AND (empleado_cv IS NOT NULL)
+    AND (empleado_hash IS NOT NULL)
+) THEN
+INSERT INTO `lista_empleado`
+VALUES(
+        empleado_nombre,
+        empleado_apellido,
+        empleado_correo,
+        empleado_dni,
+        empleado_ubicacion,
+        empleado_telefono,
+        empleado_img,
+        empleado_cv,
+        empleado_hash
+    );
 
-    if ( (nombre_empleado IS NOT NULL) AND (apellido_empleado IS NOT NULL) AND (documento_empleado IS NOT NULL) AND 
-         (correo_empleado IS NOT NULL) AND (telefono_empleado IS NOT NULL) AND (curriculum_empleado IS NOT NULL) AND
-         (alta_empleado IS NOT NULL)) THEN
+SET __mensaje = `empleado creado con exito`;
 
-         INSERT INTO `lista_empleados` VALUES (null, nombre_empleado, apellido_empleado, documento_empleado, 
-                                                      correo_empleado, telefono_empleado, curriculum_empleado
-                                                      alta_empleado);
+ELSE
 
-        SET __mensaje = `empleado creado con exito`;
+SET __mensaje = `Los campos no deben de estar vacios`;
 
-    ELSE
-        SET __mensaje = `Los campos no deben de estar vacios`;
-    END IF;
-END
--- Muestra el empleado --
+END IF;
 
-SELECT `setempleado`('nombre_empleado', 'apellido_empleado', 'documento_empleado',
-                      'correo_empleado', 'telefono_empleado', 'curriculum_empleado',
-                      'alta_empleado') AS 'Mensaje';
+RETURN __mensaje;
+
+END // 
+DELIMITER ;
