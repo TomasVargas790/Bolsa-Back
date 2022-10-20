@@ -7,6 +7,7 @@
         include("./lib/conexion.php");
         $consulta="CALL getEmpleado('$correo','$hash');";
         $envio=$conexion->query($consulta);
+        if($envio)
         session_start();
         ob_start();
         $_SESSION['nombre'] = $nombre;

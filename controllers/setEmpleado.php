@@ -8,7 +8,7 @@ $ubicacion = $_POST['empleado_ubicacion'];
 $telefono = $_POST['empleado_telefono'];
 $img = $_POST['empleado_img'];
 $cv = $_POST['empleado_cv'];
-$hash = $_POST['empleado_hash'];
+$hash = md5($_POST['empleado_hash']);
 
 
 

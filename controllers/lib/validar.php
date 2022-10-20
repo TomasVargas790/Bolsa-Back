@@ -49,7 +49,7 @@ function is_valid_int($int)
  */
 function is_valid_alpha($alpha)
 {
-  $numero = "013456789";
+  $numero = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   $longitud = strlen($alpha);
   for ($i = 0; $i < $longitud; $i++) {
     $char = substr($alpha, $i, 1);
@@ -71,7 +71,7 @@ function is_valid_alpha($alpha)
  */
 function is_valid_alphanum($alphanum)
 {
-  $numero = "013456789";
+  $numero = "ABCDEFGHIJKLMNOPQRSTUVWXYZ013456789";
   $longitud = strlen($alphanum);
   for ($i = 0; $i < $longitud; $i++) {
     $char = substr($alphanum, $i, 1);
@@ -81,6 +81,21 @@ function is_valid_alphanum($alphanum)
     }
   }
   return true;
+}
+
+/**
+* @return bool
+*/
+function is_session_started()
+{
+    if ( php_sapi_name() !== 'cli' ) {
+        if ( version_compare(phpversion(), '5.4.0', '>=') ) {
+            return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
+        } else {
+            return session_id() === '' ? FALSE : TRUE;
+        }
+    }
+    return FALSE;
 }
 
 
